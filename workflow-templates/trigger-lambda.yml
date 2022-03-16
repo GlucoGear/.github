@@ -1,0 +1,50 @@
+name: Trigger-Lambda
+
+on:
+  push:
+    branches:
+      - master
+      - homolog
+      - develop
+    paths-ignore:
+      - 'terraform/**'
+      - '.github/**'
+
+  workflow_dispatch:
+    inputs:
+      environment:        
+        required: false
+
+jobs:
+
+  lambdaDeploy:
+    name: lambdaDeploy
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Filter Branch
+        id: filter
+        run: |
+          branch_name=$(echo $GITHUB_REF | awk -F / '{print $3}')          
+          echo "::set-output name=branchName::"$branch_name""          
+
+          input_name=${{github.event.inputs.environment}}
+          if [[ $branch_name == *"ma"* || $input_name == *"prod"* ]]; then awsProfile="prd"
+          elif [[ $branch_name == *"hom"* || $input_name == *"hom"* ]]; then awsProfile="hml"
+          else awsProfile="dev"
+          fi
+          echo "::set-output name=aws_profile::$awsProfile"          
+
+      - name: Trigger Workflow
+        uses: mvasigh/dispatch-action@main
+        with:          
+          token: ${{ secrets.ACCESS_GITHUB_TOKEN }}
+          owner: GlucoGear
+          repo: terraformation
+          event_type: lambda-deploy
+          message: |
+            {
+              "repo": "${{ github.repository }}",
+              "branch": "${{ steps.filter.outputs.branchName }}",
+              "aws_profile": "${{ steps.filter.outputs.aws_profile }}"              
+            }

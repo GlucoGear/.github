@@ -1,0 +1,23 @@
+name: 'Front-Sync'
+description: 'sync react s3'
+inputs:
+  aws_profile:
+    description: 'Profile aws'
+    required: true  
+  cf_id:
+    description: 'cf id to invalidade'
+    required: true
+  bucket:
+    description: 'bucket of site'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - run: |
+        echo "Profile: ${{ inputs.aws_profile }}"       
+        echo "CFID: ${{ inputs.cf_id }}"
+        echo "Bucket: ${{ inputs.bucket }}"
+      shell: bash
+    - run: python3 ${{ github.action_path }}/main.py ${{ inputs.aws_profile }} ${{ inputs.cf_id }} ${{ inputs.bucket }}
+      shell: bash

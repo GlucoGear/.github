@@ -1,0 +1,12 @@
+name: 'Get-Key'
+description: 'get key'
+inputs:    
+  path:
+    description: 'path that changed'
+    required: true
+outputs:
+  key:
+    description: 'key of backend'
+runs:
+  using: 'node12'
+  main: 'index.js'

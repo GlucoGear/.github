@@ -1,0 +1,17 @@
+name: 'Branch Filter'
+description: 'build docker file'
+inputs:
+  environment:
+    description: 'environment'
+    required: false
+  branch:
+    description: 'branch Name'
+    required: true
+outputs:
+  environment:
+    description: 'env'  
+  environmentLowercase:
+    description: 'env'  
+runs:
+  using: 'node12'
+  main: 'index.js'

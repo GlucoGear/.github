@@ -1,0 +1,20 @@
+name: 'Diff-Path'
+description: 'get paths'
+inputs:  
+  current_commit:
+    description: 'Context commit'
+    required: true
+  pull_request_commit:
+    description: 'Last commit from pull_request'
+  git_event:
+    description: 'Event that calls workflow'
+    required: true
+  rootDir:
+    description: 'root directory of tf'
+    required: true
+outputs:
+  path:
+    description: 'Paths that have changed'
+runs:
+  using: 'node12'
+  main: 'index.js'

@@ -1,0 +1,12 @@
+name: 'Node-Build'
+description: 'build node or create dist folder'
+inputs:
+  workflow:
+    description: 'Type of workflow'
+    required: false
+    default: 'lambda'
+runs:
+  using: 'composite'
+  steps:
+    - run: python3 ${{ github.action_path }}/main.py ${{ inputs.workflow }}
+      shell: bash

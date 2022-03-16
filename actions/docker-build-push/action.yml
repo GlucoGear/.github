@@ -1,0 +1,19 @@
+name: 'Docker-Build-Push'
+description: 'build docker file'
+inputs:
+  environment:
+    description: 'environment'
+    required: true  
+  registry:
+    description: 'registry name'
+    required: true  
+  usePrd:
+    description: 'use prefix prd on registry name'
+    required: true  
+outputs:
+  image:
+    description: 'image with tag'  
+runs:
+  using: 'node12'
+  main: 'index.js'
+  

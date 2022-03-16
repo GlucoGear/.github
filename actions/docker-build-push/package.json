@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@actions/core": "^1.2.7",
+    "aws-sdk": "^2.906.0",
+    "child_process": "^1.0.2"
+  }
+}

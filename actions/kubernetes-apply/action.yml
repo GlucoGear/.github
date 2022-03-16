@@ -1,0 +1,56 @@
+name: 'K8S-Apply-Python'
+description: 'apply k8s manifests'
+inputs:
+  rootDir:
+    description: 'root dir'
+    required: true
+  taskName:
+    description: 'task name of k8s'    
+    required: true
+  namespace:
+    description: 'namespace to apply'
+    required: true
+  image:
+    description: 'image of deployment'
+    required: true
+  replicas:
+    description: 'number of replicas of pod, default: 1.'
+    required: false    
+  version:
+    description: 'version of configmap, default: 1.'
+    required: false
+  port:
+    description: 'port of pod and target port of service, default: 80.'
+    required: false
+  cpuLimit:
+    description: 'limit of cpu of pod, default: 0.5.'
+    required: false
+  memLimit:
+    description: 'limit of memory of pod, default: 256Mi.'
+    required: false
+  cpuRequest:
+    description: 'request of cpu of pod, default: 0.5.'
+    required: false
+  memRequest:
+    description: 'request of memory of pod, default: 256Mi.'
+    required: false
+  minReplicas:
+    description: 'min of replicas of hpa, default: 1.'
+    required: false
+  maxReplicas:
+    description: 'max of replicas of hpa, default: 2.'
+    required: false
+  avgCpu:
+    description: 'average cpu of hpa, default: 70%.'
+    required: false
+  avgMem:
+    description: 'average memory of hpa, default: 60%.'
+    required: false
+  configs:
+    description: 'configs of configmap (must be a json), default: {}.'
+    required: false
+runs:
+  using: "composite"
+  steps:
+    - run: python3 ${{ github.action_path }}/main.py -rd ${{ inputs.rootDir }} -t ${{ inputs.taskName }} -n ${{ inputs.namespace }} -i ${{ inputs.image }} -r ${{ inputs.replicas }} -v ${{ inputs.version }} -p ${{ inputs.port }} -cl ${{ inputs.cpuLimit }} -ml ${{ inputs.memLimit }} -cr ${{ inputs.cpuRequest }} -mrq ${{ inputs.memRequest }} -mr ${{ inputs.minReplicas }} -xr ${{ inputs.maxReplicas }} -ac ${{ inputs.avgCpu }} -am ${{ inputs.avgMem }} -c ${{ inputs.configs }}
+      shell: bash

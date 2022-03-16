@@ -1,0 +1,14 @@
+name: 'Diff-Path'
+description: 'get paths'
+inputs:
+  aws_profile:
+    description: 'Profile to set'
+    required: true
+  root_path:
+    description: 'Repo path'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - run: python3 ${{ github.action_path }}/main.py ${{ inputs.aws_profile }} ${{ inputs.root_path }}
+      shell: bash
