@@ -21,8 +21,8 @@ def main(aws_profile, root_path):
     PRD_TF_AWS_KEY_ID = os.environ["PRD_TF_AWS_KEY_ID"]
     PRD_TF_AWS_SECRET_KEY = os.environ["PRD_TF_AWS_SECRET_KEY"]    
 
-    DL_TF_AWS_KEY_ID = os.environ["DL_TF_AWS_KEY_ID"]
-    DL_TF_AWS_SECRET_KEY = os.environ["DL_TF_AWS_SECRET_KEY"]    
+    # DL_TF_AWS_KEY_ID = os.environ["DL_TF_AWS_KEY_ID"]
+    # DL_TF_AWS_SECRET_KEY = os.environ["DL_TF_AWS_SECRET_KEY"]    
 
     fileAws = open(f"{root_path}.aws/credentials","w")
 
@@ -42,10 +42,10 @@ def main(aws_profile, root_path):
     fileAws.write(f"aws_access_key_id={ PRD_TF_AWS_KEY_ID }\n")
     fileAws.write(f"aws_secret_access_key={ PRD_TF_AWS_SECRET_KEY }\n\n")
 
-    fileAws.write("[dl]\n")
-    fileAws.write(f"aws_access_key_id={ DL_TF_AWS_KEY_ID }\n")
-    fileAws.write(f"aws_secret_access_key={ DL_TF_AWS_SECRET_KEY }\n")
-    fileAws.write(f"region=sa-east-1")
+    # fileAws.write("[dl]\n")
+    # fileAws.write(f"aws_access_key_id={ DL_TF_AWS_KEY_ID }\n")
+    # fileAws.write(f"aws_secret_access_key={ DL_TF_AWS_SECRET_KEY }\n")
+    # fileAws.write(f"region=sa-east-1")
 
 
     fileAws.close()    
